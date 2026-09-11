@@ -1,0 +1,528 @@
+<title>Protocolo 21</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --surface: #111111;
+    --warm: #16130E;
+    --warm2: #1C1812;
+    --gold: #D4A017;
+    --gold-r: rgba(212,160,23,0.20);
+    --gold-d: rgba(212,160,23,0.06);
+    --text: #EDE8DC;
+    --muted: #8A8272;
+    --muted2: #55503F;
+    --border: rgba(237,232,220,0.08);
+    --danger: #C44B2A;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Barlow', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+  .wrap-wide { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-wrap: balance; margin: 0; }
+  .eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+
+  a { color: inherit; }
+
+  /* ── HEADER ── */
+  header {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark {
+    width: 34px; height: 34px; flex-shrink: 0;
+    border: 1.5px solid var(--gold-r); background: var(--gold-d);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand-mark svg { width: 17px; height: 17px; }
+  .brand-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 120px 0 96px;
+    text-align: center;
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,0.72) 0%, rgba(10,10,10,0.88) 55%, var(--ink) 100%),
+      url('hero-bg.jpg');
+    background-size: cover;
+    background-position: center 30%;
+  }
+  .hero-kicker { justify-content: center; }
+  .hero h1 {
+    font-size: clamp(38px, 6vw, 60px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    max-width: 15ch;
+    margin: 0 auto 26px;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    font-size: 18px; line-height: 1.6;
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 0 auto 40px;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--gold); color: #16130E;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 18px 38px;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease;
+    animation: pulse-gold 2.2s ease-in-out infinite;
+  }
+  .btn-gold:hover { background: #E5B428; transform: translateY(-1px); animation-play-state: paused; }
+  .btn-gold svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212,160,23,0.45); }
+    50% { box-shadow: 0 0 0 14px rgba(212,160,23,0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-gold { animation: none; }
+  }
+
+  .hero-cta-note {
+    margin-top: 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted2);
+  }
+
+  .hero-proof {
+    margin-top: 56px;
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    flex-wrap: wrap;
+  }
+  .hero-proof-line { width: 100%; max-width: 90px; height: 1px; background: var(--gold-r); }
+  .hero-proof-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted2);
+  }
+
+  /* ── SECTION SCAFFOLDING ── */
+  section { padding: 84px 0; border-top: 1px solid var(--border); }
+  section.warm { background: var(--warm); }
+  .section-head { text-align: center; margin-bottom: 56px; }
+  .section-head h2 {
+    font-size: clamp(28px, 4vw, 40px);
+    max-width: 22ch; margin: 0 auto;
+  }
+  .section-head .eyebrow { justify-content: center; }
+
+  /* ── PROBLEMA ── */
+  .problem-lines p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic;
+    color: var(--muted);
+    line-height: 1.55;
+    text-align: center;
+    max-width: 40ch;
+    margin: 0 auto 22px;
+  }
+  .problem-lines p.final {
+    color: var(--text); font-style: normal; font-size: 19px;
+    font-family: 'Barlow', sans-serif; font-weight: 500;
+    margin-top: 40px;
+  }
+
+  /* ── 4 DOMINIOS ── */
+  .domains-banner {
+    width: 100%; aspect-ratio: 21/9;
+    background: url('domains-bg.jpg') center 28% / cover;
+    border: 1px solid var(--gold-r);
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .domains-banner::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.55) 100%);
+  }
+  .domains {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .domain-card {
+    background: var(--ink);
+    padding: 32px 28px;
+  }
+  .domain-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .domain-card h3 {
+    font-size: 24px; color: var(--text); margin-bottom: 10px;
+  }
+  .domain-card p { color: var(--muted); font-size: 14.5px; line-height: 1.6; margin: 0; }
+
+  /* ── COMO FUNCIONA (day preview) ── */
+  .day-preview {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: center;
+  }
+  .day-mock {
+    background: var(--surface);
+    border: 1px solid var(--gold-r);
+    aspect-ratio: 3/4;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .day-mock-head {
+    background: var(--ink); border-bottom: 1px solid var(--gold-r);
+    padding: 10px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted2);
+  }
+  .day-mock-hero { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); }
+  .day-mock-label { font-family: 'Barlow Condensed', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .day-mock-title { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: 0.01em; text-transform: uppercase; color: var(--text); }
+  .day-mock-pillars { display: grid; grid-template-columns: 1fr 1fr; flex-shrink: 0; }
+  .day-mock-pillar { padding: 12px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+  .day-mock-pillar:nth-child(2n) { border-right: none; }
+  .day-mock-pillar-label { font-family: 'Barlow Condensed', sans-serif; font-size: 7px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+  .day-mock-pillar-txt { font-size: 8.5px; color: var(--muted); line-height: 1.4; }
+  .day-mock-notes {
+    flex: 1; position: relative;
+    background-image: repeating-linear-gradient(to bottom, transparent, transparent 13px, rgba(237,232,220,0.14) 13px, rgba(237,232,220,0.14) 14px);
+    background-position: 0 8px;
+  }
+  .day-mock-notes-label {
+    background: var(--warm); border-bottom: 1px solid var(--gold-r);
+    padding: 8px 16px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 7px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+  }
+
+  .day-copy h3 { font-size: 26px; margin-bottom: 16px; }
+  .day-copy p { color: var(--muted); font-size: 15px; margin-bottom: 14px; }
+  .day-copy ul { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-direction: column; gap: 12px; }
+  .day-copy li { display: flex; gap: 12px; align-items: flex-start; font-size: 14.5px; color: var(--text); }
+  .day-copy li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+
+  /* ── O QUE VEM ── */
+  .includes-list {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--border);
+  }
+  .includes-item {
+    display: flex; align-items: center; gap: 20px;
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .includes-item:last-child { border-bottom: none; }
+  .includes-check {
+    width: 22px; height: 22px; flex-shrink: 0;
+    border: 1px solid var(--gold-r); background: var(--gold-d);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .includes-check svg { width: 11px; height: 11px; }
+  .includes-item span { font-size: 15.5px; color: var(--text); }
+  .includes-item strong { font-weight: 600; }
+
+  /* ── DEPOIMENTOS ── */
+  .testimonials-img { width: 100%; display: block; border: 1px solid var(--gold-r); }
+
+  /* ── FAQ ── */
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 26px 0;
+  }
+  .faq-item h3 {
+    font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16.5px;
+    color: var(--text); margin-bottom: 10px;
+  }
+  .faq-item p { color: var(--muted); font-size: 14.5px; margin: 0; }
+
+  /* ── CTA FINAL ── */
+  .final-cta {
+    text-align: center;
+    background:
+      linear-gradient(180deg, var(--warm) 0%, rgba(22,19,14,0.90) 40%, rgba(10,10,10,0.94) 100%),
+      url('cta-bg.jpg');
+    background-size: cover;
+    background-position: center 35%;
+  }
+  .final-cta h2 { font-size: clamp(30px, 5vw, 44px); max-width: 18ch; margin: 0 auto 20px; }
+  .final-cta .hero-sub { margin-bottom: 36px; }
+  .price-box {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 4px;
+    margin-bottom: 30px;
+  }
+  .price-was { font-size: 14px; color: var(--muted2); text-decoration: line-through; }
+  .price-now { font-family: 'Barlow Condensed', sans-serif; font-size: 42px; font-weight: 700; color: var(--gold); }
+  .price-now sup { font-size: 18px; top: -1.1em; }
+  .price-note { font-size: 12.5px; color: var(--muted); }
+
+  .guarantee {
+    margin-top: 44px;
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    color: var(--muted); font-size: 13.5px;
+    max-width: 42ch; margin-left: auto; margin-right: auto;
+  }
+  .guarantee svg { width: 26px; height: 26px; flex-shrink: 0; color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer { padding: 40px 0 56px; text-align: center; }
+  footer .brand { justify-content: center; margin-bottom: 14px; }
+  footer p { font-size: 12px; color: var(--muted2); }
+
+  @media (max-width: 640px) {
+    .domains { grid-template-columns: 1fr; }
+    .day-preview { grid-template-columns: 1fr; }
+    .hero { padding: 64px 0 52px; }
+    section { padding: 60px 0; }
+  }
+</style>
+
+<header>
+  <div class="wrap brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="11" stroke="#D4A017" stroke-width="1.2"/>
+        <line x1="14" y1="3" x2="14" y2="25" stroke="#D4A017" stroke-width="1"/>
+        <line x1="3" y1="14" x2="25" y2="14" stroke="#D4A017" stroke-width="1"/>
+        <polygon points="14,6 17,11 11,11" fill="#D4A017" opacity="0.7"/>
+      </svg>
+    </div>
+    <span class="brand-name">Ordem Masculina</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow hero-kicker">Protocolo 21 dias</p>
+    <h1>Você não precisa de mais <em>motivação</em>. Precisa de um sistema.</h1>
+    <p class="hero-sub">21 dias. 4 domínios — mental, emocional, físico e financeiro. Uma prática objetiva por dia. <strong>Não é teoria. É repetição até virar identidade.</strong></p>
+    <a class="btn-gold" href="#preco">
+      Quero o Protocolo 21
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#16130E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <p class="hero-cta-note">Acesso imediato · formato digital, pronto pra imprimir</p>
+    <div class="hero-proof">
+      <span class="hero-proof-line"></span>
+      <span class="hero-proof-text">Baseado no framework Ordem Interna</span>
+      <span class="hero-proof-line"></span>
+    </div>
+  </div>
+</section>
+
+<section class="warm">
+  <div class="wrap">
+    <div class="problem-lines">
+      <p>Você já sabe o que precisa mudar.</p>
+      <p>Já leu, já ouviu, já decidiu "começar segunda".</p>
+      <p>E na quarta, tudo voltou a ser como era.</p>
+      <p class="final">O problema nunca foi falta de informação. Foi a ausência de um sistema que funcione mesmo nos dias em que a vontade não aparece.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p class="eyebrow">O framework</p>
+      <h2>Quatro domínios sustentam um homem. Quando um cai, os outros três seguram.</h2>
+    </div>
+    <div class="domains-banner"></div>
+    <div class="domains">
+      <div class="domain-card">
+        <p class="domain-num">01</p>
+        <h3>Mental</h3>
+        <p>Clareza de pensamento, foco e a capacidade de decidir sem ruído emocional te puxando pra trás.</p>
+      </div>
+      <div class="domain-card">
+        <p class="domain-num">02</p>
+        <h3>Emocional</h3>
+        <p>Regulação — não supressão. Reconhecer o que sente sem deixar que isso dirija suas decisões.</p>
+      </div>
+      <div class="domain-card">
+        <p class="domain-num">03</p>
+        <h3>Físico</h3>
+        <p>Energia e disposição no dia a dia. Não é sobre estética — é sobre ter combustível pra operar.</p>
+      </div>
+      <div class="domain-card">
+        <p class="domain-num">04</p>
+        <h3>Financeiro</h3>
+        <p>Clareza sobre prioridade, organização real dos gastos. Pequenos passos, decisões melhores.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="warm">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p class="eyebrow">Como funciona</p>
+      <h2>Um dia, uma prática, um espaço pra registrar o que você observou</h2>
+    </div>
+    <div class="day-preview">
+      <div class="day-mock">
+        <div class="day-mock-head"><span>Semana 01</span><span>Ordem Masculina</span></div>
+        <div class="day-mock-hero">
+          <div class="day-mock-label">Dia 03</div>
+          <div class="day-mock-title">Foco sem ruído</div>
+        </div>
+        <div class="day-mock-pillars">
+          <div class="day-mock-pillar"><div class="day-mock-pillar-label">Mental</div><div class="day-mock-pillar-txt">Prática de 5 min antes de abrir o celular.</div></div>
+          <div class="day-mock-pillar"><div class="day-mock-pillar-label">Físico</div><div class="day-mock-pillar-txt">10 min de movimento antes das 9h.</div></div>
+        </div>
+        <div class="day-mock-notes">
+          <div class="day-mock-notes-label">Suas anotações</div>
+        </div>
+      </div>
+      <div class="day-copy">
+        <h3>Cada página segue a mesma estrutura</h3>
+        <p>Sem depender de vontade pra saber o que fazer — o dia já vem definido. Sua única tarefa é executar e registrar.</p>
+        <ul>
+          <li>Uma prática objetiva por domínio, nunca as quatro de uma vez</li>
+          <li>Conceito do dia em uma frase — sem enrolação, sem teoria solta</li>
+          <li>Área de notas pautada pra registrar o que mudou em você</li>
+          <li>Formato A4, pronto pra imprimir e preencher à mão</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">O que vem incluso</p>
+      <h2>Tudo o que você recebe</h2>
+    </div>
+    <div class="includes-list">
+      <div class="includes-item">
+        <div class="includes-check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4.5" stroke="#D4A017" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>21 dias completos</strong> — um por página, sem repetição</span>
+      </div>
+      <div class="includes-item">
+        <div class="includes-check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4.5" stroke="#D4A017" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>4 domínios trabalhados em rotação</strong> — mental, emocional, físico e financeiro</span>
+      </div>
+      <div class="includes-item">
+        <div class="includes-check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4.5" stroke="#D4A017" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Área de notas diária</strong> — pautada, pra registro real da sua evolução</span>
+      </div>
+      <div class="includes-item">
+        <div class="includes-check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4.5" stroke="#D4A017" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Formato A4 digital</strong> — leia na tela ou imprima e preencha à mão</span>
+      </div>
+      <div class="includes-item">
+        <div class="includes-check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4.5" stroke="#D4A017" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Acesso imediato</strong> — comece hoje, sem esperar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="warm">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p class="eyebrow">Quem já fez</p>
+      <h2>O que muda entre o dia 1 e o dia 21</h2>
+    </div>
+    <img class="testimonials-img" src="depoimentos.png" alt="Depoimentos de homens que completaram o Protocolo 21 — relatos sobre clareza mental, rotina física, finanças organizadas e mudança de identidade ao longo dos 21 dias">
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Perguntas diretas</p>
+      <h2>Antes de você decidir</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Preciso ter lido o ebook Ordem Interna antes?</h3>
+        <p>Não. O Protocolo funciona sozinho. Se você já leu Ordem Interna, vai reconhecer os 4 domínios — mas o protocolo foi desenhado pra funcionar independente disso.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Quanto tempo por dia isso exige?</h3>
+        <p>Entre 10 e 20 minutos por prática, mais o tempo que você levar pra escrever suas notas. Não é sobre volume — é sobre consistência.</p>
+      </div>
+      <div class="faq-item">
+        <h3>E se eu perder um dia?</h3>
+        <p>Você retoma no dia seguinte. O protocolo não é sobre perfeição — é sobre voltar mais rápido depois de cada queda. Isso também é parte do sistema.</p>
+      </div>
+      <div class="faq-item">
+        <h3>É um PDF ou chega algo físico?</h3>
+        <p>É um arquivo digital em formato A4, pronto pra você imprimir e preencher à mão, ou usar direto na tela — o formato foi pensado pros dois casos.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Funciona pra quem está em um relacionamento também?</h3>
+        <p>Sim. O protocolo é sobre a estrutura interna do homem, não sobre estar sozinho ou acompanhado. Os 4 domínios sustentam qualquer contexto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="warm final-cta" id="preco">
+  <div class="wrap">
+    <p class="eyebrow hero-kicker">Comece hoje</p>
+    <h2>21 dias separam você do homem que constrói em vez do que reage</h2>
+    <p class="hero-sub">Sem promessa vazia. Sem fórmula mágica. Só o sistema, repetido até virar quem você é.</p>
+    <div class="price-box">
+      <span class="price-now"><sup>R$</sup>19,00</span>
+      <span class="price-note">Pagamento único · acesso imediato e vitalício</span>
+    </div>
+    <div>
+      <a class="btn-gold" href="#">
+        Quero começar o Protocolo 21
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#16130E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="guarantee">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="1.3"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Garantia incondicional de 7 dias. Se não fizer sentido pra você, devolvemos o valor integral.</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="11" stroke="#D4A017" stroke-width="1.2"/>
+        <line x1="14" y1="3" x2="14" y2="25" stroke="#D4A017" stroke-width="1"/>
+        <line x1="3" y1="14" x2="25" y2="14" stroke="#D4A017" stroke-width="1"/>
+        <polygon points="14,6 17,11 11,11" fill="#D4A017" opacity="0.7"/>
+      </svg>
+    </div>
+    <span class="brand-name">Ordem Masculina</span>
+  </div>
+  <p>© Ordem Masculina. Todos os direitos reservados.</p>
+</footer>
